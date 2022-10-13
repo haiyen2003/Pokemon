@@ -1,4 +1,5 @@
 from email.policy import default
+from locale import strcoll
 from wsgiref.validate import validator
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import func
@@ -23,8 +24,47 @@ class Pokemon(db.Model):
 
     items = db.relationship("Items", back_populates='pokemon')
 
-@validates("name")
-def validate_name(self, str, name):
-    if len(str) > 255 or len(str) < 0:
-        raise ValueError('name length should be from 0 - 255 characters')
-    return name
+    @validates("name")
+    def validate_name(self, str):
+        if len(str) > 255 or len(str) < 0:
+            raise ValueError('name length should be from 0 - 255 characters')
+        return str
+
+    @validates("number")
+    def validate_number(self, input):
+        if input < 1:
+            raise ValueError('number must be larger than 1')
+        return input
+
+    @validates("attack")
+    def validate_attack(self, input):
+        if input < 0 or input > 100:
+            raise ValueError("attack must be smaller than 100 and larger than 0")
+        return input
+
+    @validates("defense")
+    def validate_defense(self, input):
+        if input < 0 or input > 100:
+            raise ValueError("defense must be smaller than 100 and larger than 0")
+        return input
+
+    @validates("imageUrl")
+    def validate_imageUrl(self, input):
+        UNKNOWN_IMG_URL = "/images/unknown.png"
+        if input not in ".com" or ".org" or ".net" or "www." or ".png":
+            return UNKNOWN_IMG_URL
+
+
+    @validates('moves')
+    def validate_moves(self, input):
+        pass
+
+
+    @validates('encounterRate')
+    def validate_encounter_rate(self, input):
+        pass
+
+
+    @validates('catchRate')
+    def validate_catch_rate(self, input):
+        pass
