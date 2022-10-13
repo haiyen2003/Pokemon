@@ -16,8 +16,8 @@ class Pokemon(db.Model):
     name = db.Column(db.String(255), nullable= False)
     type = db.Column(db.Enum, nullable = False)
     moves = db.Column(db.String(255), nullable=False)
-    encounterRate = db.Column(db.Float)
-    catchRate = db.Column(db.Float)
+    encounterRate = db.Column(db.Decimal(3,2))
+    catchRate = db.Column(db.Decimal(3,2))
     captured = db.Column(db.Boolean)
     createdAt = db.Column(db.DateTime(timezone=True), server_default = func.now())
     updatedAt = db.Column(db.DateTime(timezone=True), onupdate = func.now())
@@ -62,9 +62,13 @@ class Pokemon(db.Model):
 
     @validates('encounterRate')
     def validate_encounter_rate(self, input):
-        pass
+        if input < 0 or input > 100:
+            raise ValueError('encounterRate must be larger than 0 and less than 100')
+        return input
 
 
     @validates('catchRate')
     def validate_catch_rate(self, input):
-        pass
+        if input < 0 or input > 100:
+            raise ValueError('encounterRate must be larger than 0 and less than 100')
+        return input
