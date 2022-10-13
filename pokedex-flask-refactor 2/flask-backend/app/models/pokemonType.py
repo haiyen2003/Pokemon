@@ -19,7 +19,7 @@ types = [
   "steel",
 ];
 
-class pokemonType(db.Model):
+class PokemonType(db.Model):
     __tablename__= "types"
 
     id = db.Column(db.Integer, primary_key=True)
