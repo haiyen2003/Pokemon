@@ -4,15 +4,15 @@ from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask import Flask
 from .config import Config
 from .models import db
-from .routes import ItemRoute, PokemonRoute
+from .routes import itemRoute, pokemonRoute
 from flask_migrate import Migrate
 
 import os
 
 app = Flask(__name__)
 app.config.from_object(Config)
-app.register_blueprint(ItemRoute.bp)
-app.register_blueprint(PokemonRoute.bp)
+app.register_blueprint(itemRoute.bp)
+app.register_blueprint(pokemonRoute.bp)
 db.init_app(app)
 Migrate(app, db)
 

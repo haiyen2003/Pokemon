@@ -1,7 +1,6 @@
 # 15 seeded Pokemon
 from app.models import db, Pokemon
 
-
 def seed_pokemons():
     pokemon01 = Pokemon(
         number= 1,

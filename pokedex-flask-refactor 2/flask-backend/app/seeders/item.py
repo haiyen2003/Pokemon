@@ -1,29 +1,29 @@
 #10 seeded Items
-from app.models import db, item
+# from .models import db, Item
 
 def seed_items():
-    item01 = item(
+    item01 = Item(
     pokemonId =1,
     name='Charizard',
     price=10,
     happiness=10,
     imageUrl= "/images/pokemon_egg.svg"
     )
-    item02 = item(
+    item02 = Item(
     pokemonId =2,
     name='Charizard',
     price=20,
     happiness=20,
     imageUrl= "/images/pokemon_egg.svg"
     )
-    item03= item(
+    item03= Item(
     pokemonId =3,
     name='Venusaur',
     price=30,
     happiness=30,
     imageUrl='/images/pokemon_snaps/3.svg',
     )
-    item04= item(
+    item04= Item(
     pokemonId =4,
     name='Charmander',
     price=40,
@@ -31,7 +31,7 @@ def seed_items():
     imageUrl='/images/pokemon_snaps/4.svg',
 
     )
-    item05= item(
+    item05= Item(
     pokemonId =5,
     name='Charmeleon',
     price=50,
@@ -39,14 +39,14 @@ def seed_items():
     imageUrl='/images/pokemon_snaps/5.svg',
     )
 
-    item06 = item(
+    item06 = Item(
     pokemonId =6,
     name='Charizard',
     price=60,
     happiness=60,
     imageUrl= "/images/pokemon_egg.svg",
   )
-    item07 = item(
+    item07 = Item(
     pokemonId =7,
     name='Squirtle',
     price=70,
@@ -54,7 +54,7 @@ def seed_items():
     imageUrl= '/images/pokemon_snaps/8.svg',
 
   )
-    item08= item(
+    item08= Item(
     pokemonId =8,
     name='Wartortle',
     price=80,
@@ -62,7 +62,7 @@ def seed_items():
     imageUrl= 'images/pokemon_snaps/8.svg',
 
     )
-    item09= item(
+    item09= Item(
     pokemonId =9,
     name='Wartortle',
     price=90,
@@ -70,13 +70,12 @@ def seed_items():
     imageUrl='/images/pokemon_snaps/9.svg',
 
     )
-    item10= item(
+    item10= Item(
     pokemonId =10,
     name='Caterpie',
     price=95,
     happiness=95,
     imageUrl='/images/pokemon_snaps/10.svg',
-
       )
 
 

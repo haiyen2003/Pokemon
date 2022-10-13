@@ -1,10 +1,6 @@
-from email.policy import default
-from locale import strcoll
-from wsgiref.validate import validator
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.sql import func
-db = SQLAlchemy()
+from .db import db
 from sqlalchemy.orm import validates
+from datetime import datetime
 
 class Pokemon(db.Model):
     __tablename__ = "pokemons"
@@ -16,13 +12,13 @@ class Pokemon(db.Model):
     name = db.Column(db.String(255), nullable= False)
     type = db.Column(db.Enum, nullable = False)
     moves = db.Column(db.String(255), nullable=False)
-    encounterRate = db.Column(db.Decimal(3,2))
-    catchRate = db.Column(db.Decimal(3,2))
+    encounterRate = db.Column(db.Float)
+    catchRate = db.Column(db.Float)
     captured = db.Column(db.Boolean)
-    createdAt = db.Column(db.DateTime(timezone=True), server_default = func.now())
-    updatedAt = db.Column(db.DateTime(timezone=True), onupdate = func.now())
+    createdAt = db.Column(db.DateTime, nullable = False, default= datetime.now())
+    updatedAt = db.Column(db.DateTime, nullable = False, default= datetime.now())
 
-    items = db.relationship("Items", back_populates='pokemon')
+    items = db.relationship("Item", back_populates='pokemon')
 
     @validates("name")
     def validate_name(self, str):
@@ -77,7 +73,7 @@ class Pokemon(db.Model):
     def to_dict(self):
         return {
             'id': self.id,
-            'number': self.number
+            'number': self.number,
             'attack': self.attack,
             'defense': self.defense,
             'imageUrl': self.imageUrl,
