@@ -1,7 +1,7 @@
 from .db import db
 from datetime import datetime
 
-class item(db.Model):
+class Item(db.Model):
     __tablename__= "types"
 
     id = db.Column(db.Integer, primary_key=True)

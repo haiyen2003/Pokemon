@@ -72,3 +72,21 @@ class Pokemon(db.Model):
         if input < 0 or input > 100:
             raise ValueError('encounterRate must be larger than 0 and less than 100')
         return input
+
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'number': self.number
+            'attack': self.attack,
+            'defense': self.defense,
+            'imageUrl': self.imageUrl,
+            'name': self.name,
+            'type': self.type,
+            'moves': self.moves,
+            'encounterRate': self.encounterRate,
+            'catchRate': self.catchRate,
+            'captured': self.captured,
+            'createdAt': self.createdAt,
+            'updatedAt': self.updatedAt
+        }
