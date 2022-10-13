@@ -1,9 +1,15 @@
 # 15 seeded Pokemon
-from app.models import db, Pokemon
+from app import app
+from app.models import Pokemon, db
 
-def seed_pokemons():
+with app.app_context():
+    #  db.drop_all()
+    #     print("All tables dropped!")
+
+    #   db.create_all()
+    #     print("Create all tables!")
     pokemon01 = Pokemon(
-        number= 1,
+        number= 2,
         imageUrl= '/images/pokemon_snaps/1.svg',
         name= 'Bulbasaur',
         attack= 49,
@@ -14,7 +20,7 @@ def seed_pokemons():
         captured= True
     )
     pokemon02 = Pokemon(
-        number= 2,
+        number= 3,
         imageUrl= '/images/pokemon_snaps/2.svg',
         name= 'Ivysaur',
         attack= 62,
@@ -26,7 +32,7 @@ def seed_pokemons():
         captured= True
     )
     pokemon03 = Pokemon(
-        number= 3,
+        number= 4,
         imageUrl= '/images/pokemon_snaps/3.svg',
         name= 'Venusaur',
         attack= 82,
@@ -38,7 +44,7 @@ def seed_pokemons():
         captured= True
     )
     pokemon04 = Pokemon(
-        number= 4,
+        number= 5,
         imageUrl= '/images/pokemon_snaps/4.svg',
         name= 'Charmander',
         attack= 52,
@@ -50,7 +56,7 @@ def seed_pokemons():
         captured= True
     )
     pokemon05 = Pokemon(
-        number= 5,
+        number= 6,
         imageUrl= '/images/pokemon_snaps/5.svg',
         name= 'Charmeleon',
         attack= 64,
@@ -62,7 +68,7 @@ def seed_pokemons():
         captured= True
     )
     pokemon06 = Pokemon(
-        number= 6,
+        number= 7,
         imageUrl= '/images/pokemon_snaps/6.svg',
         name= 'Charizard',
         attack= 84,
@@ -73,7 +79,7 @@ def seed_pokemons():
         captured= True
     )
     pokemon07 = Pokemon(
-        number= 7,
+        number= 8,
         imageUrl= '/images/pokemon_snaps/7.svg',
         name= 'Squirtle',
         attack= 48,
@@ -85,7 +91,7 @@ def seed_pokemons():
         captured= True
     )
     pokemon08 = Pokemon(
-        number= 8,
+        number= 9,
         imageUrl= '/images/pokemon_snaps/8.svg',
         name= 'Wartortle',
         attack= 63,
@@ -95,7 +101,7 @@ def seed_pokemons():
           'tackle,bubble,water gun,bite',
     )
     pokemon09 = Pokemon(
-        number= 9,
+        number= 10,
         imageUrl= '/images/pokemon_snaps/9.svg',
         name= 'Blastoise',
         attack= 83,
@@ -105,7 +111,7 @@ def seed_pokemons():
           'hydro pump,bubble,water gun,bite',
     )
     pokemon010 = Pokemon(
-        number= 10,
+        number= 11,
         imageUrl= '/images/pokemon_snaps/10.svg',
         name= 'Caterpie',
         attack= 30,
@@ -170,7 +176,4 @@ def seed_pokemons():
 
     db.session.add_all([pokemon01,pokemon02,pokemon03,pokemon04,pokemon05,pokemon06,pokemon07,pokemon08,pokemon09,pokemon010,pokemon011,pokemon012,pokemon013,pokemon014,pokemon015])
     db.session.commit()
-
-def undo_pokemons():
-    db.session.excute('TRUNCATE pokemons RESTART IDENTITY CASCADE;')
-    db.session.commit()
+    print("All seed completed")

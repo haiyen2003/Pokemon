@@ -1,7 +1,10 @@
 #10 seeded Items
-# from .models import db, Item
+from app.models import db, Item
+from app import app
 
-def seed_items():
+with app.app_context():
+
+  def seed_items():
     item01 = Item(
     pokemonId =1,
     name='Charizard',
