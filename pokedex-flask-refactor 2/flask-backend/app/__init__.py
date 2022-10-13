@@ -1,8 +1,11 @@
 
 # import statement for CSRF
 from flask_wtf.csrf import CSRFProtect, generate_csrf
+from flask import Flask
+from ..config import Config
 
-
+app = Flask(__name__)
+app.config.from_object(Config)
 
 # after request code for CSRF token injection
 @app.after_request
