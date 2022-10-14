@@ -11,8 +11,8 @@ import os
 
 app = Flask(__name__)
 app.config.from_object(Config)
-app.register_blueprint(itemRoute.bp)
-app.register_blueprint(pokemonRoute.bp)
+app.register_blueprint(itemRoute.item_routes)
+app.register_blueprint(pokemonRoute.pokenmon_routes)
 db.init_app(app)
 Migrate(app, db)
 

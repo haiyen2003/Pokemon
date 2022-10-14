@@ -1,6 +1,6 @@
 from .db import db
 from datetime import datetime
-from app.models import Pokemon
+from .pokemon import Pokemon
 
 class Item(db.Model):
     __tablename__= "items"

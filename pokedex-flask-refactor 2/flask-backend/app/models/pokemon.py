@@ -11,7 +11,7 @@ class Pokemon(db.Model):
     imageUrl = db.Column(db.String, nullable = False)
     name = db.Column(db.String(255), nullable= False)
     type = db.Column(db.Enum, nullable = False)
-    moves = db.Column(db.String(255), nullable=False)
+    moves = db.Column(db.String(255), nullable=True)
     encounterRate = db.Column(db.Float)
     catchRate = db.Column(db.Float)
     captured = db.Column(db.Boolean)
@@ -21,50 +21,50 @@ class Pokemon(db.Model):
     items = db.relationship("Item", back_populates='pokemon')
 
     @validates("name")
-    def validate_name(self, str):
+    def validate_name(self,key, str):
         if len(str) > 255 or len(str) < 0:
             raise ValueError('name length should be from 0 - 255 characters')
         return str
 
     @validates("number")
-    def validate_number(self, input):
+    def validate_number(self, key, input):
         if input < 1:
             raise ValueError('number must be larger than 1')
         return input
 
     @validates("attack")
-    def validate_attack(self, input):
+    def validate_attack(self, key, input):
         if input < 0 or input > 100:
             raise ValueError("attack must be smaller than 100 and larger than 0")
         return input
 
     @validates("defense")
-    def validate_defense(self, input):
+    def validate_defense(self,key, input):
         if input < 0 or input > 100:
             raise ValueError("defense must be smaller than 100 and larger than 0")
         return input
 
     @validates("imageUrl")
-    def validate_imageUrl(self, input):
+    def validate_imageUrl(self,key, input):
         UNKNOWN_IMG_URL = "/images/unknown.png"
         if input not in ".com" or ".org" or ".net" or "www." or ".png":
             return UNKNOWN_IMG_URL
 
 
     @validates('moves')
-    def validate_moves(self, input):
+    def validate_moves(self,key, input):
         pass
 
 
     @validates('encounterRate')
-    def validate_encounter_rate(self, input):
+    def validate_encounter_rate(self, key, input):
         if input < 0 or input > 100:
             raise ValueError('encounterRate must be larger than 0 and less than 100')
         return input
 
 
     @validates('catchRate')
-    def validate_catch_rate(self, input):
+    def validate_catch_rate(self,key, input):
         if input < 0 or input > 100:
             raise ValueError('encounterRate must be larger than 0 and less than 100')
         return input

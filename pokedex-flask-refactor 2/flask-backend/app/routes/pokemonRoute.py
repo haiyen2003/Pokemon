@@ -1,19 +1,19 @@
+
 from flask import Blueprint
 from app.models import db, PokemonType, Pokemon
-from app.forms import PokemonForm
+from app.forms.pokemon_form import PokemonForm
+
+pokenmon_routes = Blueprint('pokemonroute', __name__, url_prefix="/api")
 
 
-
-pokenmon_routes = Blueprint('pokemonroute', __name__, url_prefix="/")
-
-
-@pokenmon_routes.route('/')
+@pokenmon_routes.route('/pokemons')
 def all_pokemon():
     pokemons = Pokemon.query.all()
+    print('This is pokemon queries')
     return {'pokemons': [pokemon.to_dict() for pokemon in pokemons]}
 
 
-@pokenmon_routes('/', methods=['POST'])
+@pokenmon_routes.route('/pokemons', methods=['POST'])
 def add_pokemon():
     form = PokemonForm()
     if form.validate_on_submit():
@@ -34,9 +34,7 @@ def add_pokemon():
         db.session.commit()
         return newPokemon.to_dict()
 
-
-
-@pokenmon_routes.route('/<int:id', methods=['PUT'])
+@pokenmon_routes.route('/pokemons/<int:id>', methods=['PUT'])
 def edit_pokemon(id):
     form = PokemonForm
     if form.validate_on_submit():
@@ -56,9 +54,7 @@ def edit_pokemon(id):
         db.session.commit()
         return editpokemon.to_dict()
 
-@pokenmon_routes.route('/<int:id')
+@pokenmon_routes.route('/pokemons/<int:id>')
 def one_pokemon(id):
     pokemon = Pokemon.query.get(id)
     return pokemon.to_dict()
-
-
